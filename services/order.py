@@ -11,7 +11,7 @@ from db.models import MovieSession
 def create_order(
         tickets: list[dict],
         username: str,
-        date: str
+        date: str = None
 ) -> Order:
 
     user = get_user_model().objects.get(username=username)
