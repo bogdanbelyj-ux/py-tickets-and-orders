@@ -2,8 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-import settings
-
+from django.conf import settings
 
 class Genre(models.Model):
     name = models.CharField(max_length=255, unique=True)

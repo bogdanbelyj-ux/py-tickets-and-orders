@@ -1,9 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.db.models import QuerySet
-from django.forms import DateTimeField
 
 from db.models import Order
-from db.models import User
 from db.models import Ticket
 from db.models import MovieSession
 
@@ -12,10 +11,10 @@ from db.models import MovieSession
 def create_order(
         tickets: list[dict],
         username: str,
-        date: DateTimeField = None
+        date: str
 ) -> Order:
 
-    user = User.objects.get(username=username)
+    user = get_user_model().objects.get(username=username)
     if date:
         order = Order.objects.create(user=user, created_at=date)
     else:
