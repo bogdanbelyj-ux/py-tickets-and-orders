@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.db.models import QuerySet
 
@@ -15,6 +14,7 @@ def create_order(
         username: str,
         date: str = None
 ) -> Order:
+    from django.contrib.auth import get_user_model
     user = get_user_model().objects.get(username=username)
 
     order = Order.objects.create(user=user)
