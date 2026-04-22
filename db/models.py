@@ -60,11 +60,12 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="orders"
     )
 
     def __str__(self) -> str:
-        return f"Order: {self.created_at}"
+        return f"<Order: {self.created_at}>"
 
     class Meta:
         ordering = ("-created_at",)
@@ -85,10 +86,10 @@ class Ticket(models.Model):
     seat = models.IntegerField()
 
     def __str__(self) -> str:
-        return (f"Ticket: "
+        return (f"<Ticket: "
                 f"{self.movie_session.movie.title} "
                 f"{self.movie_session.show_time} (row: {self.row}, "
-                f"seat: {self.seat})")
+                f"seat: {self.seat})>")
 
     def clean(self) -> None:
         if not 1 <= self.row <= self.movie_session.cinema_hall.rows:
